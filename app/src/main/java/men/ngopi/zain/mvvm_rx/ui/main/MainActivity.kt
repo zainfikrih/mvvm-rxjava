@@ -14,9 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val mainViewModel: MainViewModel by viewModels()
-//        val baseUrl: String = App().baseUrl
-
-//        Log.d("BASE URL", baseUrl)
 
         mainViewModel.getFlowableUsers().observe(this) {
             when (it.status) {
