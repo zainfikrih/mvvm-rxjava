@@ -5,15 +5,26 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
+import men.ngopi.zain.mvvm_rx.App
 import men.ngopi.zain.mvvm_rx.R
+import men.ngopi.zain.mvvm_rx.data.source.Repository
 import men.ngopi.zain.mvvm_rx.data.source.local.entity.Status
+import men.ngopi.zain.mvvm_rx.viewmodel.ViewModelFactory
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var repository: Repository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mainViewModel: MainViewModel by viewModels()
+        (applicationContext as App).appComponent.inject(this)
+
+        val mainViewModel: MainViewModel by viewModels {
+            ViewModelFactory(repository, this)
+        }
 
         mainViewModel.getFlowableUsers().observe(this) {
             when (it.status) {

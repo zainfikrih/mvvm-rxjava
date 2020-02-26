@@ -5,8 +5,8 @@ import men.ngopi.zain.mvvm_rx.data.source.Repository
 import men.ngopi.zain.mvvm_rx.data.source.local.entity.Resource
 import men.ngopi.zain.mvvm_rx.data.source.local.entity.User
 
-class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
-    private val repository = Repository
+class MainViewModel(private val repository: Repository, private val state: SavedStateHandle) :
+    ViewModel() {
 
     fun getFlowableUsers(): LiveData<Resource<List<User>>> {
         val users = MediatorLiveData<Resource<List<User>>>()
