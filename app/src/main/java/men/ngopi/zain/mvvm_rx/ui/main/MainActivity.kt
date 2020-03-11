@@ -6,9 +6,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import men.ngopi.zain.mvvm_rx.App
-import men.ngopi.zain.mvvm_rx.R
 import men.ngopi.zain.mvvm_rx.data.source.Repository
 import men.ngopi.zain.mvvm_rx.data.source.local.entity.Status
+import men.ngopi.zain.mvvm_rx.databinding.ActivityMainBinding
 import men.ngopi.zain.mvvm_rx.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
@@ -16,9 +16,12 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var repository: Repository
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         (applicationContext as App).appComponent.inject(this)
 
